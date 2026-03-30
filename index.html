@@ -189,7 +189,7 @@ footer a{color:var(--muted);text-decoration:none;}footer a:hover{color:var(--acc
 </div>
 
 <script>
-const KEY = "YOUR_API_KEY_HERE";
+const WORKER_URL = "https://YOUR_WORKER.workers.dev"; // ← set your Cloudflare Worker URL after deploying
 
 const SYS = `You are an AI assistant on Nour-Imane Kerroumi's recruitment page. Answer recruiters honestly and concisely.
 Always respond in this exact format:
@@ -267,9 +267,9 @@ async function send(){
   msgs.appendChild(ad);msgs.scrollTop=msgs.scrollHeight;
 
   try{
-    const r=await fetch('https://api.anthropic.com/v1/messages',{
+    const r=await fetch(`${WORKER_URL}/v1/messages`,{
       method:'POST',
-      headers:{'Content-Type':'application/json','x-api-key':KEY,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+      headers:{'Content-Type':'application/json','anthropic-version':'2023-06-01'},
       body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:500,system:SYS,messages:[{role:'user',content:q}]})
     });
     const data=await r.json();
