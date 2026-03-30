@@ -273,6 +273,11 @@ async function send(){
       body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:500,system:SYS,messages:[{role:'user',content:q}]})
     });
     const data=await r.json();
+    if(!r.ok||data.error){
+      const msg=data.error?.message||data.error||JSON.stringify(data);
+      ad.innerHTML=`<div class="mrole a">error</div><div class="mbody" style="color:var(--muted)">API error ${r.status}: ${msg}</div>`;
+      document.getElementById('sbtn').disabled=false;msgs.scrollTop=msgs.scrollHeight;return;
+    }
     const raw=data.content?.[0]?.text||'No response.';
     const{body,conf,ev}=parseR(raw);
     ad.innerHTML=`<div class="mrole a">model</div><div class="mbody">${body}</div>`;
