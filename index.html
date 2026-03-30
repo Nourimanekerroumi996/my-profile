@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nour-Imane Kerroumi — ML Engineer Profile</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#080c14;--surface:#0f1521;--surface2:#141b2d;--border:#1a2238;--border2:#243050;
+  --accent:#4f8ef7;--accent2:#7c6ff7;--green:#3dd68c;--amber:#f5a623;
+  --text:#e2e8f4;--muted:#6b7a99;--dim:#2e3a54;
+  --fm:'JetBrains Mono',monospace;--fd:'Syne',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:var(--fm);font-size:13px;line-height:1.7;min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);
+  background-size:44px 44px;opacity:.22;}
+.wrap{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:0 24px 80px;}
+
+header{padding:52px 0 36px;border-bottom:1px solid var(--border);margin-bottom:36px;animation:fadeUp .6s ease both;}
+.live{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.1em;color:var(--green);text-transform:uppercase;margin-bottom:12px;}
+.live::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:pulse 2s ease-in-out infinite;}
+h1{font-family:var(--fd);font-size:clamp(30px,5.5vw,48px);font-weight:800;letter-spacing:-.03em;line-height:1.05;}
+h1 em{color:var(--accent);font-style:normal;}
+.sub{font-size:12px;color:var(--muted);margin-top:10px;letter-spacing:.04em;}
+.hrow{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;}
+.cblock{text-align:right;font-size:11px;color:var(--muted);line-height:2.1;}
+.cblock a{color:var(--accent);text-decoration:none;}
+.badges{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px;}
+.badge{font-size:11px;padding:3px 11px;border:1px solid var(--border2);border-radius:4px;color:var(--muted);}
+.badge.hi{border-color:rgba(79,142,247,.5);color:var(--accent);}
+
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:36px;animation:fadeUp .6s .1s ease both;}
+.metric{background:var(--surface);padding:16px 20px;}
+.mv{font-family:var(--fd);font-size:24px;font-weight:700;}
+.mv.g{color:var(--green);}.mv.b{color:var(--accent);}.mv.a{color:var(--amber);}.mv.p{color:var(--accent2);}
+.ml{font-size:10px;color:var(--muted);margin-top:3px;letter-spacing:.04em;}
+
+.tabs{display:flex;gap:2px;margin-bottom:24px;animation:fadeUp .6s .15s ease both;}
+.tab{font-family:var(--fm);font-size:11px;padding:8px 18px;border:1px solid var(--border2);border-radius:5px;cursor:pointer;color:var(--muted);background:transparent;letter-spacing:.06em;text-transform:uppercase;transition:all .15s;}
+.tab.on{background:var(--accent);border-color:var(--accent);color:#fff;}
+.tab:not(.on):hover{border-color:var(--accent);color:var(--accent);}
+.panel{display:none;}.panel.on{display:block;}
+
+/* CHAT */
+.box{background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;animation:fadeUp .6s .2s ease both;}
+.bhdr{padding:13px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.btitle{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;}
+.pill{font-size:10px;color:var(--accent2);border:1px solid var(--accent2);padding:2px 9px;border-radius:3px;opacity:.75;}
+.chips-row{padding:14px 20px;border-bottom:1px solid var(--border);}
+.clbl{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;margin-bottom:9px;}
+.chips{display:flex;flex-wrap:wrap;gap:7px;}
+.chip{font-family:var(--fm);font-size:11px;padding:5px 12px;border:1px solid var(--border2);border-radius:4px;color:var(--muted);cursor:pointer;background:transparent;transition:all .15s;}
+.chip:hover{border-color:var(--accent);color:var(--accent);background:rgba(79,142,247,.06);}
+.messages{padding:20px;min-height:260px;max-height:500px;overflow-y:auto;display:flex;flex-direction:column;gap:22px;}
+.messages::-webkit-scrollbar{width:3px;}.messages::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+.msg{animation:fadeIn .3s ease both;}
+.mrole{font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px;}
+.mrole.u{color:var(--amber);}.mrole.a{color:var(--green);}.mrole.s{color:var(--muted);}
+.mbody{font-size:13px;line-height:1.8;}.mbody.ut{color:var(--muted);}
+.cfw{margin-top:12px;}
+.cfl{font-size:10px;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:5px;}
+.cft{height:3px;background:var(--border);border-radius:2px;overflow:hidden;}
+.cff{height:100%;border-radius:2px;transition:width .9s cubic-bezier(.4,0,.2,1);}
+.cff.hi{background:var(--green);}.cff.md{background:var(--amber);}.cff.lo{background:var(--dim);}
+.evtags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+.evtag{font-size:10px;padding:3px 9px;border:1px solid var(--green);border-radius:3px;color:var(--green);}
+.thinking{display:flex;align-items:center;gap:6px;color:var(--muted);font-size:12px;}
+.dot{width:4px;height:4px;border-radius:50%;background:var(--accent);animation:blink 1.2s ease infinite;}
+.dot:nth-child(2){animation-delay:.2s;}.dot:nth-child(3){animation-delay:.4s;}
+.irow{padding:14px 20px;border-top:1px solid var(--border);display:flex;gap:10px;align-items:flex-end;}
+.irow textarea{flex:1;font-family:var(--fm);font-size:13px;background:var(--bg);border:1px solid var(--border2);border-radius:6px;color:var(--text);padding:9px 13px;resize:none;outline:none;line-height:1.6;max-height:110px;transition:border-color .15s;}
+.irow textarea:focus{border-color:var(--accent);}
+.irow textarea::placeholder{color:var(--dim);}
+.sbtn{font-family:var(--fm);font-size:11px;padding:9px 18px;background:var(--accent);color:#fff;border:none;border-radius:6px;cursor:pointer;letter-spacing:.06em;transition:opacity .15s,transform .1s;white-space:nowrap;}
+.sbtn:hover{opacity:.88;}.sbtn:active{transform:scale(.97);}.sbtn:disabled{opacity:.3;cursor:not-allowed;}
+
+/* ATTENTION */
+.adesc{font-size:11px;color:var(--dim);padding:12px 20px 0;line-height:1.7;}
+.aarea{padding:20px;}
+.albl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;}
+.trow{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:20px;}
+.tok{font-size:12px;padding:5px 11px;border-radius:4px;cursor:pointer;transition:all .2s;border:1px solid transparent;}
+.tok.job{background:rgba(79,142,247,.1);border-color:rgba(79,142,247,.25);color:var(--accent);}
+.tok.job:hover,.tok.job.on{background:rgba(79,142,247,.25);border-color:var(--accent);}
+.tok.cv{background:rgba(61,214,140,.07);border-color:rgba(61,214,140,.18);color:var(--green);}
+.mscores{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px;padding-top:20px;border-top:1px solid var(--border);}
+.mcard{flex:1;min-width:130px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:12px 16px;}
+.mname{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;}
+.mbarw{height:3px;background:var(--border);border-radius:2px;overflow:hidden;margin-bottom:6px;}
+.mbar{height:100%;border-radius:2px;transition:width 1s cubic-bezier(.4,0,.2,1);}
+.mpct{font-size:13px;font-weight:500;}
+
+footer{margin-top:48px;padding-top:24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:11px;color:var(--dim);animation:fadeUp .6s .3s ease both;}
+footer a{color:var(--muted);text-decoration:none;}footer a:hover{color:var(--accent);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+@keyframes blink{0%,80%,100%{opacity:.2}40%{opacity:1}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="hrow">
+    <div>
+      <div class="live">available april 2026</div>
+      <h1>Nour-Imane<br><em>Kerroumi</em></h1>
+      <p class="sub">Data Scientist · ML Engineer · Deep Learning · HPC · MLOps</p>
+      <div class="badges">
+        <span class="badge hi">PyTorch</span><span class="badge hi">Transformers</span>
+        <span class="badge hi">HPC / CUDA</span><span class="badge hi">MLOps</span>
+        <span class="badge">AWS</span><span class="badge">PySpark</span>
+        <span class="badge">FastAPI</span><span class="badge">Docker</span>
+        <span class="badge">MLflow</span><span class="badge">arXiv 2025</span>
+      </div>
+    </div>
+    <div class="cblock">
+      <div>Paris — nationwide mobility</div>
+      <div>+33 6 56 68 23 70</div>
+      <a href="mailto:nourimane.kerroumi@outlook.com">nourimane.kerroumi@outlook.com</a><br>
+      <a href="https://linkedin.com/in/nour-imane-kerroumi" target="_blank">LinkedIn</a> · <a href="https://arxiv.org/abs/2507.09084" target="_blank">arXiv</a>
+    </div>
+  </div>
+</header>
+
+<div class="metrics">
+  <div class="metric"><div class="mv g">&gt;95%</div><div class="ml">compute speedup — SLB</div></div>
+  <div class="metric"><div class="mv b">92.7%</div><div class="ml">accuracy — flight delay model</div></div>
+  <div class="metric"><div class="mv a">60%</div><div class="ml">migration time cut — Schneider</div></div>
+  <div class="metric"><div class="mv p">73.1</div><div class="ml">MSc distinction — Cranfield</div></div>
+  <div class="metric"><div class="mv" style="color:#e2e8f4">80/100</div><div class="ml">thesis — multi-fidelity ML</div></div>
+</div>
+
+<div class="tabs">
+  <button class="tab on" onclick="showTab('chat',this)">// ask me anything</button>
+  <button class="tab" onclick="showTab('attn',this)">// attention map</button>
+</div>
+
+<!-- CHAT -->
+<div class="panel on" id="panel-chat">
+<div class="box">
+  <div class="bhdr"><span class="btitle">// recruiter Q&A — powered by Claude</span><span class="pill">RAG on full profile</span></div>
+  <div class="chips-row">
+    <div class="clbl">// suggested queries</div>
+    <div class="chips">
+      <button class="chip" onclick="ask('Can she work on production ML systems?')">production ML?</button>
+      <button class="chip" onclick="ask('Does she know transformer architectures deeply?')">transformer expertise?</button>
+      <button class="chip" onclick="ask('What makes her unique vs other ML candidates?')">what makes her unique?</button>
+      <button class="chip" onclick="ask('Has she published research?')">publications?</button>
+      <button class="chip" onclick="ask('Why does she want to join Atos?')">why Atos?</button>
+      <button class="chip" onclick="ask('Can she work on HPC infrastructure?')">HPC experience?</button>
+    </div>
+  </div>
+  <div class="messages" id="msgs">
+    <div class="msg"><div class="mrole s">system</div><div class="mbody">Hello. I'm loaded with Nour-Imane's complete profile — experience, projects, skills, motivations. Ask me anything you'd ask in a first screening call.</div></div>
+  </div>
+  <div class="irow">
+    <textarea id="qi" rows="1" placeholder="Ask anything about this candidate..." onkeydown="hkey(event)" oninput="ars(this)"></textarea>
+    <button class="sbtn" id="sbtn" onclick="send()">send ↵</button>
+  </div>
+</div>
+</div>
+
+<!-- ATTENTION MAP -->
+<div class="panel" id="panel-attn">
+<div class="box">
+  <div class="bhdr"><span class="btitle">// semantic attention map — profile × job offer</span><span class="pill">transformer-style</span></div>
+  <p class="adesc">Click any keyword from the Atos job offer (blue) to see which parts of Nour-Imane's background light up — like attention weights in a transformer model.</p>
+  <div class="aarea">
+    <div class="albl">// atos job offer — keywords</div>
+    <div class="trow" id="jtoks"></div>
+    <canvas id="ac" style="width:100%;height:64px;display:block;margin:4px 0;"></canvas>
+    <div class="albl" style="margin-top:8px">// nour-imane's profile — evidence</div>
+    <div class="trow" id="ctoks"></div>
+    <div class="mscores" id="mscores"></div>
+  </div>
+</div>
+</div>
+
+<footer>
+  <span>Nour-Imane Kerroumi · ML Engineer · 2026</span>
+  <span><a href="mailto:nourimane.kerroumi@outlook.com">email</a> · <a href="https://linkedin.com/in/nour-imane-kerroumi" target="_blank">linkedin</a> · <a href="https://arxiv.org/abs/2507.09084" target="_blank">arxiv</a></span>
+</footer>
+</div>
+
+<script>
+const KEY = "YOUR_API_KEY_HERE";
+
+const SYS = `You are an AI assistant on Nour-Imane Kerroumi's recruitment page. Answer recruiters honestly and concisely.
+Always respond in this exact format:
+[answer in 2-4 sentences]
+confidence: [0-100]
+evidence: [tag1, tag2, tag3]
+
+=== PROFILE ===
+Name: Nour-Imane Kerroumi | Data Scientist · ML Engineer | Paris (mobile nationwide) | CDI from April 2026
+Languages: French (native), English (C1 IELTS), Spanish (intermediate)
+
+EDUCATION
+- MSc Computational Intelligence for Data Analytics — Cranfield University UK | 2024-2025 | Distinction 73.1/100
+  Thesis: Physics-Informed ML for Reduced-Order Shock Simulation (multi-fidelity modeling) — 80/100
+- Diplôme Ingénieur Généraliste Trilingue — ESTIA Bidart France | 2022-2025
+
+EXPERIENCE
+1. Research ML Engineer Intern — SLB (Schlumberger) | May–Nov 2025
+   Built hybrid framework: POD + LSTM/Transformers/GRU to accelerate FEA mechanical shock simulations.
+   Multi-fidelity learning (low→high fidelity), HPC training. Result: >95% compute time cut (hours→seconds).
+   Contributed to a confidential patent on AI-accelerated simulations.
+
+2. Data Engineer Intern — Schneider Electric | May–Sept 2024
+   SCADA migration: Python+VBA automation, ETL pipelines for XML/industrial data, SQL validation.
+   Result: ~60% reduction in migration time.
+
+PROJECTS
+- SkyDenied: CNN+LSTM+attention for flight delay prediction. Accuracy 92.7%, F1 93.2%, US→EU transfer.
+  Published arXiv:2507.09084 (2025).
+- AWS distributed system: S3/SQS/EC2/CloudWatch, MapReduce-style, fault-tolerant async pipelines.
+- Big Data pipeline: PySpark ETL, K-Means clustering, Docker deployment.
+
+SKILLS: PyTorch, TensorFlow, Keras, CNN/RNN/LSTM/Transformers, Scikit-learn, XGBoost, LightGBM,
+PySpark, Hadoop, AWS (S3/EC2/SQS/Lambda), Docker, MLflow, FastAPI, CI/CD, CUDA/OpenMP/MPI,
+Python, SQL, C, C++, Java, Matplotlib, Seaborn, Plotly.
+
+WHY ATOS: Wants to deploy AI in critical infrastructure — where a model makes a real operational difference.
+Her dual research+engineering background (patent + arXiv + production pipelines) bridges experimentation and production.
+Drawn to Atos's work at the intersection of AI and complex industrial systems.
+=== END ===`;
+
+function showTab(id,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  document.getElementById('panel-'+id).classList.add('on');
+  btn.classList.add('on');
+}
+
+function ars(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,110)+'px';}
+function hkey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send();}}
+function ask(q){document.getElementById('qi').value=q;send();}
+
+function parseR(t){
+  const cm=t.match(/confidence\s*:\s*(\d+)/i);
+  const em=t.match(/evidence\s*:\s*([^\n]+)/i);
+  const conf=cm?parseInt(cm[1]):null;
+  const ev=em?em[1].split(',').map(s=>s.trim()).filter(Boolean):[];
+  let body=t.replace(/confidence\s*:\s*\d+/gi,'').replace(/evidence\s*:\s*[^\n]+/gi,'').trim();
+  return{body,conf,ev};
+}
+
+async function send(){
+  const qi=document.getElementById('qi');
+  const q=qi.value.trim();if(!q)return;
+  qi.value='';qi.style.height='auto';
+  document.getElementById('sbtn').disabled=true;
+  const msgs=document.getElementById('msgs');
+
+  const ud=document.createElement('div');ud.className='msg';
+  ud.innerHTML=`<div class="mrole u">recruiter</div><div class="mbody ut">${q}</div>`;
+  msgs.appendChild(ud);
+
+  const ad=document.createElement('div');ad.className='msg';
+  ad.innerHTML=`<div class="mrole a">model</div><div class="thinking"><div class="dot"></div><div class="dot"></div><div class="dot"></div><span style="margin-left:6px;font-size:11px">processing...</span></div>`;
+  msgs.appendChild(ad);msgs.scrollTop=msgs.scrollHeight;
+
+  try{
+    const r=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','x-api-key':KEY,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:500,system:SYS,messages:[{role:'user',content:q}]})
+    });
+    const data=await r.json();
+    const raw=data.content?.[0]?.text||'No response.';
+    const{body,conf,ev}=parseR(raw);
+    ad.innerHTML=`<div class="mrole a">model</div><div class="mbody">${body}</div>`;
+    if(conf!==null){
+      const lv=conf>=75?'hi':conf>=45?'md':'lo';
+      const cw=document.createElement('div');cw.className='cfw';
+      cw.innerHTML=`<div class="cfl"><span>confidence</span><span>${conf}/100</span></div><div class="cft"><div class="cff ${lv}" style="width:0%"></div></div>`;
+      ad.appendChild(cw);setTimeout(()=>cw.querySelector('.cff').style.width=conf+'%',60);
+    }
+    if(ev.length){
+      const et=document.createElement('div');et.className='evtags';
+      et.innerHTML=ev.map(e=>`<span class="evtag">${e}</span>`).join('');
+      ad.appendChild(et);
+    }
+  }catch(err){
+    ad.innerHTML=`<div class="mrole a">error</div><div class="mbody" style="color:var(--muted)">${err.message}</div>`;
+  }
+  document.getElementById('sbtn').disabled=false;
+  msgs.scrollTop=msgs.scrollHeight;
+}
+
+/* ATTENTION MAP */
+const JT=[
+  {l:'ML Engineer',     k:['SLB internship','surrogate modeling','PyTorch','CNN+LSTM']},
+  {l:'Deep Learning',   k:['Transformers/GRU','PyTorch','CNN+LSTM','attention mech.']},
+  {l:'production ML',   k:['FastAPI','Docker','MLflow','CI/CD','Schneider pipelines']},
+  {l:'large-scale data',k:['PySpark','Hadoop','ETL pipelines','AWS S3/SQS/EC2']},
+  {l:'cloud / AWS',     k:['AWS S3/SQS/EC2','Lambda','CloudWatch','Docker']},
+  {l:'HPC / perf.',     k:['CUDA/OpenMP/MPI','HPC training','>95% speedup','FEA simulation']},
+  {l:'research',        k:['arXiv 2025','SLB patent','Cranfield MSc','multi-fidelity ML']},
+  {l:'critical systems',k:['SCADA migration','FEA simulation','SLB R&D','Schneider Electric']},
+];
+const CT=[
+  'SLB internship','surrogate modeling','PyTorch','CNN+LSTM',
+  'Transformers/GRU','attention mech.','FastAPI','Docker',
+  'MLflow','CI/CD','Schneider pipelines','PySpark',
+  'Hadoop','ETL pipelines','AWS S3/SQS/EC2','Lambda',
+  'CloudWatch','CUDA/OpenMP/MPI','HPC training','>95% speedup',
+  'FEA simulation','arXiv 2025','SLB patent','Cranfield MSc',
+  'multi-fidelity ML','SCADA migration','Schneider Electric','F1 93.2%',
+];
+const MS=[
+  {l:'Deep Learning',pct:96,c:'#3dd68c'},
+  {l:'HPC & perf.',  pct:94,c:'#4f8ef7'},
+  {l:'MLOps',        pct:82,c:'#7c6ff7'},
+  {l:'Data Eng.',    pct:85,c:'#f5a623'},
+  {l:'Research',     pct:90,c:'#3dd68c'},
+];
+let activeJ=null;
+
+function buildAttn(){
+  const jc=document.getElementById('jtoks');
+  const cc=document.getElementById('ctoks');
+  const mc=document.getElementById('mscores');
+  JT.forEach((t,i)=>{
+    const el=document.createElement('button');el.className='tok job';el.textContent=t.l;
+    el.onclick=()=>activateJ(i,el);jc.appendChild(el);
+  });
+  CT.forEach(t=>{
+    const el=document.createElement('div');el.className='tok cv';el.textContent=t;el.dataset.l=t;
+    cc.appendChild(el);
+  });
+  MS.forEach(m=>{
+    const c=document.createElement('div');c.className='mcard';
+    c.innerHTML=`<div class="mname">${m.l}</div><div class="mbarw"><div class="mbar" style="width:0%;background:${m.c}"></div></div><div class="mpct" style="color:${m.c}">${m.pct}%</div>`;
+    mc.appendChild(c);setTimeout(()=>c.querySelector('.mbar').style.width=m.pct+'%',500);
+  });
+}
+
+function wt(lbl,keys){
+  if(keys.includes(lbl))return 1;
+  return keys.some(k=>lbl.toLowerCase().includes(k.toLowerCase().split(' ')[0])||k.toLowerCase().includes(lbl.toLowerCase().split(' ')[0]))?0.5:0;
+}
+
+function activateJ(idx,btn){
+  document.querySelectorAll('.tok.job').forEach(t=>t.classList.remove('on'));
+  btn.classList.add('on');activeJ=idx;
+  const keys=JT[idx].k;
+  document.querySelectorAll('.tok.cv').forEach(t=>{
+    t.classList.remove('lit');
+    const w=wt(t.dataset.l,keys);
+    if(w>0){
+      t.style.opacity=0.4+0.6*w;
+      t.style.borderColor=`rgba(61,214,140,${0.3+0.7*w})`;
+      t.style.color=`rgba(61,214,140,${0.5+0.5*w})`;
+    }else{t.style.opacity='0.2';t.style.borderColor='';t.style.color='';}
+  });
+  drawL(idx);
+}
+
+function drawL(ji){
+  const cv=document.getElementById('ac');
+  const ctx=cv.getContext('2d');
+  const dpr=window.devicePixelRatio||1;
+  const r=cv.getBoundingClientRect();
+  cv.width=r.width*dpr;cv.height=r.height*dpr;
+  ctx.scale(dpr,dpr);ctx.clearRect(0,0,r.width,r.height);
+  const keys=JT[ji].k;
+  const jbtn=document.querySelectorAll('.tok.job')[ji];
+  const cr=cv.getBoundingClientRect();
+  const jr=jbtn.getBoundingClientRect();
+  const jx=jr.left+jr.width/2-cr.left;
+  document.querySelectorAll('.tok.cv').forEach(cb=>{
+    const w=wt(cb.dataset.l,keys);if(!w)return;
+    const cbr=cb.getBoundingClientRect();
+    const cx=cbr.left+cbr.width/2-cr.left;
+    ctx.beginPath();ctx.moveTo(jx,0);
+    const mx=(jx+cx)/2;
+    ctx.bezierCurveTo(mx,r.height*.3,mx,r.height*.7,cx,r.height);
+    ctx.strokeStyle=`rgba(61,214,140,${0.12+0.55*w})`;
+    ctx.lineWidth=0.5+1.5*w;ctx.stroke();
+  });
+}
+
+buildAttn();
+window.addEventListener('resize',()=>{if(activeJ!==null)drawL(activeJ);});
+</script>
+</body>
+</html>
