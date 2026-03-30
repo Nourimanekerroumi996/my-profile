@@ -269,7 +269,7 @@ async function send(){
   try{
     const r=await fetch(`${WORKER_URL}/v1/messages`,{
       method:'POST',
-      headers:{'Content-Type':'application/json','anthropic-version':'2023-06-01'},
+      headers:{'Content-Type':'application/json'},
       body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:500,system:SYS,messages:[{role:'user',content:q}]})
     });
     const data=await r.json();
